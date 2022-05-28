@@ -57,7 +57,7 @@ export class App extends Component {
     const { handleChange, handleDelete, handleSubmit, nameInputId } = this;
 
     return (
-      <div>
+      <>
         <h1>Phonebook</h1>
         <ContactForm
           handleSubmit={handleSubmit}
@@ -74,7 +74,7 @@ export class App extends Component {
           filter={filter}
           handleDelete={handleDelete}
         />
-      </div>
+      </>
     );
   }
 }
