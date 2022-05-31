@@ -23,12 +23,10 @@ export class App extends Component {
     this.setState({ filter: evt.target.value });
   };
 
-  handleDelete = evt => {
-    evt.preventDefault();
+  handleDelete = id => {
     const { contacts } = this.state;
     contacts.forEach(
-      (contact, index) =>
-        contact.name === evt.target.name && contacts.splice(index, 1)
+      (contact, index) => contact.id === id && contacts.splice(index, 1)
     );
     this.setState({ contacts: contacts });
   };
@@ -36,6 +34,11 @@ export class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     const { handleChange, handleDelete, formSubmitHandler } = this;
+    const contactsFiltered = [];
+    contacts.forEach(contact => {
+      contact.name.toLowerCase().includes(filter.toLowerCase()) &&
+        contactsFiltered.push(contact);
+    });
 
     return (
       <div>
@@ -44,11 +47,12 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter filter={filter} handleChange={handleChange} />
-        <ContactList
-          contacts={contacts}
-          filter={filter}
-          handleDelete={handleDelete}
-        />
+        {contactsFiltered && (
+          <ContactList
+            contacts={contactsFiltered}
+            handleDelete={handleDelete}
+          />
+        )}
       </div>
     );
   }

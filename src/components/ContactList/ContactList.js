@@ -2,21 +2,19 @@ import ContactItem from 'components/ContactItem/ContactItem';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
-export default function ContactList({ contacts, filter, handleDelete }) {
+export default function ContactList({ contacts, handleDelete }) {
   return (
     <ul>
-      {contacts.map(
-        ({ id, name, number }) =>
-          name.toLowerCase().includes(filter.toLowerCase()) && (
-            <li className={s.li} key={id}>
-              <ContactItem
-                name={name}
-                number={number}
-                handleDelete={handleDelete}
-              />
-            </li>
-          )
-      )}
+      {contacts.map(({ id, name, number }) => (
+        <li className={s.li} key={id}>
+          <ContactItem
+            id={id}
+            name={name}
+            number={number}
+            handleDelete={handleDelete}
+          />
+        </li>
+      ))}
     </ul>
   );
 }
@@ -29,6 +27,5 @@ ContactList.propTypes = {
       id: PropTypes.string.isRequired,
     })
   ),
-  filter: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };

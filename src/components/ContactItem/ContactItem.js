@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import s from './ContactItem.module.css';
 
-export default function ContactItem({ name, number, handleDelete }) {
+export default function ContactItem({ id, name, number, handleDelete }) {
   return (
     <>
       <span>
@@ -11,7 +11,7 @@ export default function ContactItem({ name, number, handleDelete }) {
         className={s.button}
         type="submit"
         name={name}
-        onClick={handleDelete}
+        onClick={() => handleDelete(id)}
       >
         Delete
       </button>
@@ -20,6 +20,7 @@ export default function ContactItem({ name, number, handleDelete }) {
 }
 
 ContactItem.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,
