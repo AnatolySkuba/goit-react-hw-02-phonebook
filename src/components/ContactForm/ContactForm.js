@@ -1,20 +1,11 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 
 export default class ContactForm extends Component {
-  state = { name: '', number: '' };
+  static propTypes = { formSubmitHandler: PropTypes.func.isRequired };
 
-  static defaultProps = {
-    formSubmitHandler: function formSubmitHandler(data) {
-      const { name, number } = data;
-      const { contacts } = this.state;
-      contacts.some(contact => contact.name === name)
-        ? alert(`${name} is already in contacts`)
-        : contacts.push({ id: nanoid(), name: name, number: number });
-      this.setState({ contacts: contacts });
-    },
-  };
+  state = { name: '', number: '' };
 
   handleSubmit = e => {
     e.preventDefault();

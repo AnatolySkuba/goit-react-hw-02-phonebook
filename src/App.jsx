@@ -24,11 +24,14 @@ export class App extends Component {
   };
 
   handleDelete = id => {
-    const { contacts } = this.state;
-    contacts.forEach(
-      (contact, index) => contact.id === id && contacts.splice(index, 1)
-    );
-    this.setState({ contacts: contacts });
+    // const { contacts } = this.state;
+    // contacts.forEach(
+    //   (contact, index) => contact.id === id && contacts.splice(index, 1)
+    // );
+    // this.setState({ contacts: contacts });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   render() {
